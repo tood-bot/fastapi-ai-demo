@@ -1,0 +1,177 @@
+# FastAPI RAG Chatbot Usage Guide
+
+## Overview
+
+The RAG chatbot has been successfully converted from a CLI application to a FastAPI web application with a beautiful HTML frontend.
+
+## Starting the Application
+
+```bash
+# Make sure you're in the project directory and have activated your virtual environment
+python app.py
+```
+
+The server will start on `http://localhost:8000`
+
+## Accessing the Chatbot
+
+### Web Interface (Recommended)
+Open your browser and go to: **http://localhost:8000**
+
+You'll see a beautiful chat interface with:
+- Modern gradient design
+- Real-time messaging
+- Source citations with page numbers
+- Response time tracking
+- Mobile-friendly responsive design
+- Enter key to send messages
+
+### API Endpoints
+
+#### 1. Chat Endpoint
+```bash
+POST http://localhost:8000/chat
+Content-Type: application/json
+
+{
+  "message": "Your question here"
+}
+```
+
+**Response:**
+```json
+{
+  "answer": "AI-generated answer",
+  "sources": "source files with page numbers",
+  "response_time": 2.34
+}
+```
+
+**Example:**
+```bash
+curl -X POST http://localhost:8000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What are the main strategies for controlling diabetes?"}'
+```
+
+#### 2. Health Check
+```bash
+GET http://localhost:8000/health
+```
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "message": "RAG Chatbot is ready"
+}
+```
+
+## Features
+
+### Web Interface Features
+- **Beautiful UI**: Modern gradient design with smooth animations
+- **Real-time Chat**: Instant messaging with typing indicators
+- **Source Citations**: Shows document sources and page numbers
+- **Response Timing**: Displays how long each query took
+- **Mobile Responsive**: Works on desktop, tablet, and mobile
+- **Keyboard Shortcuts**: Press Enter to send messages
+- **Error Handling**: Graceful error messages for failed requests
+
+### API Features
+- **RESTful Design**: Clean JSON API endpoints
+- **Fast Responses**: Optimized for quick query processing
+- **Source Tracking**: Returns document sources with page numbers
+- **Performance Metrics**: Response time tracking
+- **Health Monitoring**: Health check endpoint for monitoring
+- **Error Handling**: Proper HTTP status codes and error messages
+
+## Technical Details
+
+### Backend (FastAPI)
+- **Framework**: FastAPI with Uvicorn server
+- **Port**: 8000 (configurable)
+- **Features**: Async support, automatic API documentation
+- **Integration**: Same RAG functionality as original CLI
+
+### Frontend (Embedded HTML)
+- **Technology**: Vanilla HTML/CSS/JavaScript
+- **Design**: CSS Grid and Flexbox for responsive layout
+- **Styling**: Modern gradient background with smooth animations
+- **JavaScript**: Fetch API for backend communication
+
+### RAG Components
+- **Vector Store**: ChromaDB with OpenAI embeddings
+- **LLM**: GPT-4o-mini for fast responses
+- **Memory**: Conversation buffer for context
+- **Retrieval**: Similarity search with 4 document chunks
+- **Monitoring**: LangSmith integration (if configured)
+
+## Comparing with CLI Version
+
+| Feature | CLI Version | FastAPI Version |
+|---------|-------------|-----------------|
+| Interface | Command line | Web browser |
+| Accessibility | Terminal users | Anyone with browser |
+| Deployment | Local only | Web deployable |
+| Sharing | Not shareable | Shareable via URL |
+| Mobile Support | No | Yes |
+| API Access | No | Yes |
+| Integration | Limited | REST API |
+
+## Next Steps
+
+### For Development
+1. **Add Authentication**: Implement user login/registration
+2. **Database Storage**: Persist conversation history
+3. **File Upload**: Allow users to upload new documents
+4. **Advanced UI**: Add more interactive features
+
+### For Deployment
+1. **Production Server**: Use production ASGI server (e.g., Gunicorn + Uvicorn)
+2. **Environment Config**: Use environment-specific settings
+3. **Load Balancing**: Handle multiple concurrent users
+4. **Monitoring**: Add application monitoring and logging
+
+### For Integration
+1. **API Documentation**: FastAPI auto-generates docs at `/docs`
+2. **Client Libraries**: Build clients in different languages
+3. **Webhooks**: Add webhook support for notifications
+4. **Batch Processing**: Support batch question processing
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Port Already in Use**
+   ```bash
+   # Find process using port 8000
+   lsof -i :8000
+   # Kill the process
+   kill -9 <PID>
+   ```
+
+2. **Database Issues**
+   ```bash
+   # Regenerate the database
+   rm -rf db
+   python ingest.py
+   ```
+
+3. **Import Errors**
+   ```bash
+   # Reinstall dependencies
+   pip install -r requirements.txt
+   ```
+
+4. **OpenAI API Errors**
+   - Check your `.env` file has valid `OPENAI_API_KEY`
+   - Verify your OpenAI account has sufficient credits
+
+## Success!
+
+Your RAG chatbot is now running as a modern web application! 🎉
+
+- **Web UI**: http://localhost:8000
+- **API Docs**: http://localhost:8000/docs (auto-generated by FastAPI)
+- **Health Check**: http://localhost:8000/health

@@ -1,0 +1,9 @@
+langchain==0.1.0
+langchain-openai==0.0.5
+chromadb==0.4.22
+openai>=1.10.0,<2.0.0
+pypdf==3.17.3
+python-dotenv==1.0.0
+langsmith==0.0.87
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
